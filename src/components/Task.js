@@ -1,13 +1,18 @@
 import React from "react";
+import Task from "./Task";
 
-function Task() {
+function TaskList({tasks, setTasks}) {
+
+  function handleDeleteTask(taskName){
+    const updatedTasks = tasks.filter(task=>task.text !== taskName)
+    setTasks(updatedTasks)
+  }
+
   return (
-    <div className="task">
-      <div className="label">CATEGORY HERE</div>
-      <div className="text">TEXT HERE</div>
-      <button className="delete">X</button>
+    <div className="tasks">
+      {tasks.map(task=><Task key={task.text} category={task.category} text={task.text} handleDeleteTask = {handleDeleteTask}/>)}
     </div>
   );
 }
 
-export default Task;
+export default TaskList;
